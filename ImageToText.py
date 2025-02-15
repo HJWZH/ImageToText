@@ -103,7 +103,7 @@ def check_and_create():
 
 # 程序启动后直接执行检查和创建操作
 if check_and_create() == 0:
-    exit()
+    os._exit(0)
 
 check.mainloop()
 
@@ -144,7 +144,7 @@ class ImageToTextApp:
 
         # 开源及意见、BUG反馈按钮
         history_btn = tk.Button(button_frame, text="开源及意见、BUG反馈", command=self.BUGs)
-        history_btn.grid(row=0, column=3, padx=2)
+        history_btn.grid(row=0, column=4, padx=2)
 
         # 显示文字的文本框，随窗口变化而变化大小
         self.text_box = tk.Text(self.root, wrap=tk.WORD)
@@ -173,13 +173,14 @@ class ImageToTextApp:
     def recognize_text(self):
         global file_path
 
-        self.text_box.delete(1.0, tk.END)
-        self.text_box.insert(tk.END, f"已选择文件：{file_path}\n正在识别文字，请稍候...\n请不要关闭窗口！")
-
         if not self.image_path:
             messagebox.showwarning("警告", "请先选择图片！")
             return
         
+        self.text_box.delete(1.0, tk.END)
+        self.text_box.insert(tk.END, f"已选择文件：{file_path}\n正在识别文字，请稍候...\n请不要关闭窗口！")
+        self.root.update()
+
         #try:
         #if 1==1:
         start_time = time.time()
