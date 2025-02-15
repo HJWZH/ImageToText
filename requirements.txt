@@ -1,0 +1,4 @@
+pytesseract
+numpy
+pillow
+opencv-python
